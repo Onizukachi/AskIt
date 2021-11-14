@@ -13,6 +13,9 @@
   <body>
   <nav>
       <ul>
+      <!-- link_tо показываеь что будет написано в названиее ссылки, дальше идет ссылка наша -->
+      <!-- root это префикс маршрута(смотрим в rails routes) тоесть короткое имя '/'-->
+      <!-- Вместо path можнл написать _url тогда в ссылку будет входить еще и имя домена, например localhost:3000/questions --> >
         <li><%= link_to 'Home', root_path %></li>
         <li><%= link_to 'Questions', questions_path %></li>
       </ul>
@@ -21,6 +24,6 @@
     <main>
     <%= yield %>
     </main>
-    
+
   </body>
 </html>

@@ -9,5 +9,16 @@
 
   <p>
     <%= question.body %>
+  <br>
+  <!-- открыть информацию только об одном вопросе -->
+  <%= link_to 'Show', question_path(question) %>
+
+  <!-- edit_question_path (Префикс из нашего rails routes)(ПУТЬ) должен принимать обьект question чтобы идентификатор вопроса подставить в строку запроса-->
+  <!-- можно подписать (question.id) но метод id вызовется автоматически относительно этого обьекта -->
+  <%= link_to 'Edit', edit_question_path(question) %>
+
+  <!-- удалить вопрос, здесь пишет просто путь к вопросу, но непросто, а обьясняем что метод должен быть delete(нестандартный глагол HTTP)-->
+  <!-- cofirm сообщение которое срашивает уверены вы или нет, проверочка такая -->
+  <%= link_to 'Destroy', question_path(question), data: {method: :delete, confirm: 'Are you sure?'} %>
   </p>
 <% end %>
