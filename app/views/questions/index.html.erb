@@ -1,24 +1,25 @@
-<h1>Questions</h1>
+<h1 class="mb-4">Questions</h1>
 
+<%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg' %>
 <% @questions.each do |question| %>
-  <h2><%= question.title %></h2>
+  <article class="card mt-3">
+    <div class="card-body">
+      <h4><%= question.title %></h2>
 
-  <time datetime="<%= question.formatted_created_at %>">
-    <%= question.formatted_created_at %>
-  </time>
+      <section class="card-text">
+        <time datetime="<%= question.formatted_created_at %>">
+          <small><%= question.formatted_created_at %></small>
+        </time>
 
-  <p>
-    <%= question.body %>
-  <br>
-  <!-- открыть информацию только об одном вопросе -->
-  <%= link_to 'Show', question_path(question) %>
+        <p class="my-2">
+          <%= question.body %>
+        </p>
+      </section>
 
-  <!-- edit_question_path (Префикс из нашего rails routes)(ПУТЬ) должен принимать обьект question чтобы идентификатор вопроса подставить в строку запроса-->
-  <!-- можно подписать (question.id) но метод id вызовется автоматически относительно этого обьекта -->
-  <%= link_to 'Edit', edit_question_path(question) %>
-
-  <!-- удалить вопрос, здесь пишет просто путь к вопросу, но непросто, а обьясняем что метод должен быть delete(нестандартный глагол HTTP)-->
-  <!-- cofirm сообщение которое срашивает уверены вы или нет, проверочка такая -->
-  <%= link_to 'Destroy', question_path(question), data: {method: :delete, confirm: 'Are you sure?'} %>
-  </p>
+      <%= link_to 'Show', question_path(question), class: 'btn btn-primary' %> 
+      <%= link_to 'Edit', edit_question_path(question), class: 'btn btn-secondary' %>
+      <%= link_to 'Destroy', question_path(question), class: 'btn btn-danger',
+        data: {method: :delete, confirm: 'Are you sure?'} %>
+    </div>
+  </article>
 <% end %>

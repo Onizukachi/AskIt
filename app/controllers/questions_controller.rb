@@ -8,7 +8,8 @@ class QuestionsController < ApplicationController
         #Удаляем нужный вопрос
         @question = Question.find_by id: params[:id]
         @question.destroy
-        #после удаления делаем редирект на страницу со всемивопросами
+        flash[:success] = "Question deleated"
+        #после удаления делаем редирект на страницу со всеми вопросами
         redirect_to questions_path
     end
     
@@ -26,6 +27,7 @@ class QuestionsController < ApplicationController
         @question = Question.find_by id: params[:id]
         #если получилось обновить наш вопрос с новыми параметрами
         if @question.update question_params
+          flash[:success] = "Question updated!"
             #redirect перенаправит пользователя на другую страницу(в нашем случае сттраницу всех вопросов)
             redirect_to questions_path
         else
@@ -49,6 +51,8 @@ class QuestionsController < ApplicationController
     def create
         @question = Question.new question_params
         if @question.save
+            #флеш хранилище которое хранится в сессии, сообщение выдастся 1 раз и после перезагрузки страницы не будет появляться
+            flash[:success] = "Question created!"
             #redirect перенаправит пользователя на другую страницу(в нашем случае сттраницу всех вопросов)
             redirect_to questions_path
         else
