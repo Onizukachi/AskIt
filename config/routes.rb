@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   #для questions создать маршруты только методов что в массиве
   #%i перед массивом автоматом ставит запятые между элементами
   #Но мы используем здесь все стандартные 7 мметодов, все что сверху написал, если нужны конкретные
-  resources :questions
+  #Это вложенные маршруты, и ответы пока можно только создавать create
+  resources :questions do
+    resources :answers, only: %i[create destroy]
+  end
 
   root 'pages#index'
 end

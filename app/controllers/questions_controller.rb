@@ -1,13 +1,20 @@
 class QuestionsController < ApplicationController
-    #show нужен чтобы выдывать информацию о конкретной записи
+
+    #before говорит что это действие запустится до того как запускается сам экшш
+    before_action :set_question!, only: %i[show destroy edit update]
+
     def show
-        @question = Question.find_by id: params[:id]
+      #Ниже код чтобы создать ответ к конкретному вопросу
+      #В памяти создаем образец класса answer, но при этом сразу привязываем этот ответ к вопросу с помощью даннрой конструкции build
+      # ВОТ ЧТО ПОЛУЧАЕТСЯ (q.answers.build => #<Answer id: nil, body: nil, question_id: 10(тут id нашего вопроса), created_at: nil, updated_at: nil)
+      @answer = @question.answers.build
+
+      @answers = @question.answers.order created_at: :desc
     end
     
     def destroy
-        #Удаляем нужный вопрос
-        @question = Question.find_by id: params[:id]
         @question.destroy
+        #flash это вспышка(поле зеленое с заданным текстом), появялется только для сессии, после перезагрузки исчезает
         flash[:success] = "Question deleated"
         #после удаления делаем редирект на страницу со всеми вопросами
         redirect_to questions_path
@@ -15,16 +22,10 @@ class QuestionsController < ApplicationController
     
     #Форму редактирования загружаем
     def edit
-        #find by принимает 1 или нессколько полей для посика
-        #id: это название того поля в бд по которому делаеся посик, params это обьект со всеми параметрами запроса
-        #[:id] параметр запроса берется из мартшрута
-        #params[:id] ПОДСТАВЯЛЕТСЯ ИЗ view нашего вот с этой строки (<%= link_to 'Edit', edit_question_path(question) %>
-        @question = Question.find_by id: params[:id]
     end
 
     def update
         #edit он форму показывает для редакитирования, а update уже отправляет данные
-        @question = Question.find_by id: params[:id]
         #если получилось обновить наш вопрос с новыми параметрами
         if @question.update question_params
           flash[:success] = "Question updated!"
@@ -67,5 +68,13 @@ class QuestionsController < ApplicationController
     #и достать только title и body. Чобы пользовател не могли внести некорректные данные, например передать id
     def question_params
         params.require(:question).permit(:title, :body)
+    end
+
+    def set_question!
+       #find by принимает 1 или несколько полей для посика, если не находит, возвращает nil, поэтому ошибка выходит уже во views
+        #find тоже ищет по id, но не если не находит, он пишет RecordNotFound, ошибка уже вылетает здесь в контроллере и ее легко перехватить в application_controller
+       #[:id] параметр запроса берется из мартшрута
+        #params[:id] ПОДСТАВЯЛЕТСЯ ИЗ view нашего вот с этой строки (<%= link_to 'Edit', edit_question_path(question) %>
+      @question = Question.find params[:id]
     end
   end

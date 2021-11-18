@@ -1,6 +1,7 @@
 /*Этот файл application загружается автоматически, его не нужно указывать на страницах*/
 @import 'bootstrap';
 
+/*Стилизуем вывод ошибок при валидации с помощью препроцессора scss, $ переменная из github bootstrap */
 .field_with_errors {
   .form-control {
     border-color: $red;
