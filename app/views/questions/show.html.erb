@@ -1,3 +1,7 @@
+<% currently_at 'Questions' %>
+
+<% provide :page_title, 'Show question' %>
+
 <h1 class="mb-4"><%= @question.title %></h1>
 
 <time datetime="<%= @question.formatted_created_at %>">
@@ -17,37 +21,26 @@
 
 <h2>Write your answer</h2>
 
-<!--Здесь снизу наш паршел с ошибками-->
-<%= render 'shared/errors', object: @answer %>
-
-<!--Эта форма для создания ответа для вопроса   -->
-<%= form_with model: [@question, @answer] do |f| %>
-  <div class="mb-3 row">
-    <div class="col-sm-2 col-form-label">
-      <%= f.label :body %>
-    </div>
-
-    <div class="col-sm-10">
-      <%= f.text_area :body, class: 'form-control' %>
-    </div>
-  </div>
-
-  <%= f.submit "Submit answer!", class: 'btn btn-primary' %>
-<% end %>
+<!-- Это паршел с формой созданитя ответ, он же и для редактирования -->
+<%= render'answers/form' %>
 
 <h2 class="mt-5">Answers</h2>
 
 <% @answers.each do |answer| %>
-  <article class="mb-3">
-    <time datetime="<%= answer.formatted_created_at %>">
-      <%= answer.formatted_created_at %>
-    </time>
+  <article class="mb-3 card">
+    <div class="card-body">
+      <section class="card-text">
+        <small><time datetime="<%= answer.formatted_created_at %>">
+          <%= answer.formatted_created_at %>
+        </time></small>
 
-    <p>
+    <p class="mt-2 mb-3">
       <%= answer.body %>
     </p>
+      </section>
 
-    <%= link_to 'Delete', question_answer_path(@question, answer), class: 'btn btn-danger btn-xs',
+    <%= link_to 'Edit', edit_question_answer_path(@question, answer), class: 'btn btn-info btn-sm' %>
+    <%= link_to 'Delete', question_answer_path(@question, answer), class: 'btn btn-danger btn-sm',
       data: {method: :delete, confirm: "Are you sure?"} %>
   </article>
 <% end %>

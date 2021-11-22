@@ -1,3 +1,9 @@
+<!--provide значит передать значение для конкретного yield и значение у нас Questions, оно подставляется в layout, application.  Тоесть устанавилваем текст иконке сайта -->
+<% provide :page_title, 'Questions' %>
+
+<!--используем хелпер для вывода меню и показывает где мы находимся, то есть передаем Questions-->
+<% currently_at 'Questions' %>
+
 <h1 class="mb-4">Questions</h1>
 
 <%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg' %>

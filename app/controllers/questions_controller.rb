@@ -8,7 +8,9 @@ class QuestionsController < ApplicationController
       #В памяти создаем образец класса answer, но при этом сразу привязываем этот ответ к вопросу с помощью даннрой конструкции build
       # ВОТ ЧТО ПОЛУЧАЕТСЯ (q.answers.build => #<Answer id: nil, body: nil, question_id: 10(тут id нашего вопроса), created_at: nil, updated_at: nil)
       @answer = @question.answers.build
-
+      
+      #можно найти ответы для вопроса еще так
+      #= Answer.where(question_id: @question.id) или кратко (question: @question).order created_at: :desc
       @answers = @question.answers.order created_at: :desc
     end
     

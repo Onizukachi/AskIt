@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   #Но мы используем здесь все стандартные 7 мметодов, все что сверху написал, если нужны конкретные
   #Это вложенные маршруты, и ответы пока можно только создавать create
   resources :questions do
-    resources :answers, only: %i[create destroy]
+    #exept - кроме опреденных маршуртов
+    resources :answers, except: %i[new show]
   end
 
   root 'pages#index'
