@@ -7,6 +7,10 @@
 <h1 class="mb-4">Questions</h1>
 
 <%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg' %>
+
+<!--paginate добавляет ссылки для перехода между страница при разбивке элементов коллекции с помощью kaminari -->
+<%= paginate @questions %>
+
 <% @questions.each do |question| %>
   <article class="card mt-3">
     <div class="card-body">
@@ -18,7 +22,8 @@
         </time>
 
         <p class="my-2">
-          <%= question.body %>
+          <!--truncate хелпер который обрезает содержимое(строка например),length: 150 сколько символово оставить,omission: - что писать в конце обрезания -->  
+          <%= truncate strip_tags(question.body), length: 150, omission: '...(continued)' %>  <!--strip_tags хелпер который удаляет все теги которые есть в тексте, а зато в show у нас стоит обрабочтков тегов sanitize -->
         </p>
       </section>
 
@@ -29,3 +34,5 @@
     </div>
   </article>
 <% end %>
+
+<%= paginate @questions %>

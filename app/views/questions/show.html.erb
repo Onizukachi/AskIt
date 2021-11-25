@@ -8,9 +8,9 @@
   <%= @question.formatted_created_at %>
 </time>
 
-<p class="lead my-3">
-  <%= @question.body %>
-</p>
+<div class="lead my-3">
+  <%= sanitize @question.body %>  <!--sanitize это хелпер чтобы позволять вписывать свои теги html и они будут обрабатываться как html -->
+</div>
 
 <%= link_to 'Show', question_path(@question), class: 'btn btn-primary' %> 
 <%= link_to 'Edit', edit_question_path(@question), class: 'btn btn-secondary' %>
@@ -19,28 +19,23 @@
 
 <hr class="my-3"> 
 
-<h2>Write your answer</h2>
+<h2 class="mt-3">Write your answer</h2>
 
 <!-- Это паршел с формой созданитя ответ, он же и для редактирования -->
 <%= render'answers/form' %>
 
 <h2 class="mt-5">Answers</h2>
 
-<% @answers.each do |answer| %>
-  <article class="mb-3 card">
-    <div class="card-body">
-      <section class="card-text">
-        <small><time datetime="<%= answer.formatted_created_at %>">
-          <%= answer.formatted_created_at %>
-        </time></small>
+<!--разбивка на страницы вопросы, добавляет цифры перехода между страницами -->
+<%= paginate @answers %> 
 
-    <p class="mt-2 mb-3">
-      <%= answer.body %>
-    </p>
-      </section>
+<!-- ЭТо фишка rails. Рельсы увидят что @answers это коллекция(массив типо), поймет что от него потребуется отрендерить каждый эелмент коллекции-->
+<!-- и по умолчанию он полезет в директорию answers, и найдет в нец файл _answer.hrml.erb и сделае рендер каждого элемента -->
+<!-- все что сверху это если бы написали просто render @ansewers, но мы объявим локальную переменную в паршл -->
+<!--будем рендорить именно паршл, пишем директорию, рендорим именно коллекцию , collection говорит что рендорим нужно все элементы по очереди -->
+<!--as - говорим как должны называться элементы коллекции,( каждый элемент будет помещаться в переменную с таким названием в паршл-->
+<!-- locals значит другие локальные переменные будут в себя вклдючать question значение которого нужно взять из переменной @question, которая в свою очередь обьявлена в контроллере -->
+<%= render partial: 'answers/answer', collection: @answers,
+  as: :answer, locals: {question: @question} %>
 
-    <%= link_to 'Edit', edit_question_answer_path(@question, answer), class: 'btn btn-info btn-sm' %>
-    <%= link_to 'Delete', question_answer_path(@question, answer), class: 'btn btn-danger btn-sm',
-      data: {method: :delete, confirm: "Are you sure?"} %>
-  </article>
-<% end %>
+<%= paginate @answers %>

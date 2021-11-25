@@ -27,7 +27,8 @@ class AnswersController < ApplicationController
   def update
     if @answer.update answer_params
       flash[:success] = 'Answer updated!'
-      redirect_to question_path(@question)
+      # anchor значит якорь, то при редиректре нас прокрутит до этого answer. поэтому в предсставлении кажждому ответу задали id
+      redirect_to question_path(@question, anchor: "answer-#{@answer.id}")
       else
         render :edit
     end
