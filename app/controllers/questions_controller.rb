@@ -9,10 +9,8 @@ class QuestionsController < ApplicationController
       # ВОТ ЧТО ПОЛУЧАЕТСЯ (q.answers.build => #<Answer id: nil, body: nil, question_id: 10(тут id нашего вопроса), created_at: nil, updated_at: nil)
       @answer = @question.answers.build
       
-      #можно найти ответы для вопроса еще так  Answer.where(question_id: @question.id) или кратко (question: @question).order created_at: :desc
-       #page разбиваем ответы по 25 по умолчанию, можно изменить в конфиге скок надо, или здесь а конце добавить .per(2), то есть 2 вопроса на странице
-       @answers = @question.answers.order(created_at: :desc).page(params[:page])
-      #page(params[:page]) разобьет только, а чтобы добавить менюшку для страниц уже во вьюшку добавляем <%= paginate @answers %>
+      #Делаем разбивку по страницам с помощью гема page
+       @pagy, @answers = pagy @question.answers.order(created_at: :desc)
     end
     
     def destroy
@@ -41,11 +39,9 @@ class QuestionsController < ApplicationController
     end
     
     def index
-      #вытаскиваем все вопросы и сортируем их, сначала новые. и применяем гем KAMINARI который нужен чтобы разбить записи на страницы
-      #чтобы установить сначала добавим в gemfile потом сервер остановить, потьом bundle install, потом копируем конфиругурацию из gita себе, пишем rails g kaminari:config
-      #файл находится в config/initialize и там настройки, по дефолту он отображает 25 записей. page разбивает коллекцию по страницам, 
-      #rails g kaminari:views default запускаем что загрузить вьюшки и менять спокойно вид, там все изменено как в видео, разобраться надо, пример на сайте бутстрав раздел pagination
-      @questions = Question.order(created_at: :desc).page params[:page]
+      #Делдаем разбивку страниц и включаем кнопки для переключения
+      #дописыыаем @pagy потомучто метод вернет массив состоящий из двух элементов. Он выдаст вопросы которые уже разбиты по страницам
+      @pagy, @questions = pagy Question.order(created_at: :desc)
     end
 
     #new нужен чтобы пользователь открыл эту страницу, увидел интерфейс и опубликовал вопрос

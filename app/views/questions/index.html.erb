@@ -6,10 +6,10 @@
 
 <h1 class="mb-4">Questions</h1>
 
-<%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg' %>
+<%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg mb-3' %>
 
-<!--paginate добавляет ссылки для перехода между страница при разбивке элементов коллекции с помощью kaminari -->
-<%= paginate @questions %>
+<!--Добавляем разбивку страницы. == значат обрабатывать как html -->
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %> 
 
 <% @questions.each do |question| %>
   <article class="card mt-3">
@@ -35,4 +35,4 @@
   </article>
 <% end %>
 
-<%= paginate @questions %>
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %> 

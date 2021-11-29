@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  #Создаем ресурс для пользователя
+  resources :users, only: %i[new create]
+  
   #resources создает множество маршрутов для 1 контроллера, можно подписать only: %i[index new edit create update destroy show]
   #для questions создать маршруты только методов что в массиве
   #%i перед массивом автоматом ставит запятые между элементами
