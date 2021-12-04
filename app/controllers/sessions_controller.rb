@@ -7,8 +7,9 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by email: params[:email]
     if user&.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:success] = "Welcome to the app, #{current_user.name_or_email}!"
+      #Записываем пользоваетля в сессию, метод в concerns лежиьт
+      sign_in user
+      flash[:success] = "Welcome back, #{current_user.name_or_email}!"
       redirect_to root_path
     else
       flash[:warning] = "Incorrect email and/or password!"
@@ -17,6 +18,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-
+    sign_out
+    flash[:success] = "See you later"
+    redirect_to root_path
   end
 end

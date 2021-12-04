@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   #когда пользователь входтт в систему он же создает сессию, и отображаем форму для входа, проверяем форму и пускаем, и позволять выходить destriy
-  resources :sessions, only: %i[new create destroy]
+  #resource для того чтобы не нужны были идентификаты в маршрутах, чтобы выйти например из сессии destroy
+  resource :session, only: %i[new create destroy]
   #Создаем ресурс для пользователя
   resources :users, only: %i[new create]
   

@@ -16,8 +16,17 @@ module Authentication
   def user_signed_in?
     current_user.present?
   end
-  
+
+  #При входе пользователя записываем в сессию его
+  def sign_in(user)
+    session[:user_id] = user.id
+  end
+
+  #удалить информацию из сессии user_id
+  def sign_out
+    session.delete :user_id
+  end
    #Это значтит следующие методы могут работать как хелперы, не только в контроллерах но во вью чтоб доступны были
     helper_method :current_user, :user_signed_in?
-end
+    end
   end

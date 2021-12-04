@@ -7,9 +7,9 @@ class UsersController < ApplicationController
     @user = User.new user_params
     if @user.save
       #Когда пользователя удалось сохранить мыможем его впустить. Значит поставить признак для пользователя говорящий что вот он зареогистрирован и вошел в систему
-      #ставим идентификатор пользователя в сессию
+      #ставим идентификатор пользователя в сессию, логика в методе в concerns
       #ссесия хитрое хранилище, в которое пользотваель не может влезть, и они действуеют ограничено, когда юзер закрыл бразуер они очистились
-      session[:user_id] = @user.id
+      sign_in @user
       #Не просто имя а задекорированные имя, то есть вызывае метод из application_controoler
       flash[:success] = "Welcome to the app, #{current_user.name_or_email}"
       redirect_to root_path
