@@ -4,6 +4,5 @@ class User < ApplicationRecord
   has_secure_password
 #uniqueness чтобыне было одинаковых майлов, эти проверки на уровне кода, то есть они не сработают если писать запрос в бд анпрямую. НО в db где пишем там уже серрьзгные проверки
   validates :email, presence: true, uniqueness: true
-  validates :name, presence: true
   
 end

@@ -7,10 +7,13 @@ class QuestionsController < ApplicationController
       #Ниже код чтобы создать ответ к конкретному вопросу
       #В памяти создаем образец класса answer, но при этом сразу привязываем этот ответ к вопросу с помощью даннрой конструкции build
       # ВОТ ЧТО ПОЛУЧАЕТСЯ (q.answers.build => #<Answer id: nil, body: nil, question_id: 10(тут id нашего вопроса), created_at: nil, updated_at: nil)
+      @question = @question.decorate
       @answer = @question.answers.build
       
-      #Делаем разбивку по страницам с помощью гема page
+      #Делаем разбивку по страницам с помощью гема page 
        @pagy, @answers = pagy @question.answers.order(created_at: :desc)
+       #и снизу декорируем всю коллекцию ответов
+       @answers = @answers.decorate
     end
     
     def destroy
@@ -42,6 +45,8 @@ class QuestionsController < ApplicationController
       #Делдаем разбивку страниц и включаем кнопки для переключения
       #дописыыаем @pagy потомучто метод вернет массив состоящий из двух элементов. Он выдаст вопросы которые уже разбиты по страницам
       @pagy, @questions = pagy Question.order(created_at: :desc)
+      #Декорируем коллекцию, нельзя сверху дописать, они конфликтьуют с pagy
+      @questions = @questions.decorate
     end
 
     #new нужен чтобы пользователь открыл эту страницу, увидел интерфейс и опубликовал вопрос

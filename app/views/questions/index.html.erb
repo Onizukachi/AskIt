@@ -8,8 +8,9 @@
 
 <%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg mb-3' %>
 
-<!--Добавляем разбивку страницы. == значат обрабатывать как html -->
-<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %> 
+<!--Добавляем разбивку страницы. == значат обрабатывать как html   ЭТО ЕСЛИ МЫ НАПИСАЛИ БЫ ТУТ не делая хелпер. Вот так <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %> -->
+<!-- Но мы пишем вот так выносим в хелпер -->
+<%= pagination @pagy %> 
 
 <% @questions.each do |question| %>
   <article class="card mt-3">
@@ -35,4 +36,4 @@
   </article>
 <% end %>
 
-<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %> 
+<%= pagination @pagy %> 

@@ -10,7 +10,8 @@ class UsersController < ApplicationController
       #ставим идентификатор пользователя в сессию
       #ссесия хитрое хранилище, в которое пользотваель не может влезть, и они действуеют ограничено, когда юзер закрыл бразуер они очистились
       session[:user_id] = @user.id
-      flash[:success] = "Welcome to the app, #{@user.name}"
+      #Не просто имя а задекорированные имя, то есть вызывае метод из application_controoler
+      flash[:success] = "Welcome to the app, #{current_user.name_or_email}"
       redirect_to root_path
     else
       render :new
