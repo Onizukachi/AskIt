@@ -41,5 +41,19 @@
     </div>
   </div>
 
-  <%= f.submit "Register", class: 'btn btn-primary btn-lg' %>
+  <!-- отображать поле старого паролья при edit только если профиль меняем и юзер уже есть в бд -->
+  <% unless @user.new_record? %>
+    <div class="mb-3 row">
+      <div class="col-sm-2 col-form-label">
+        <%= f.label :old_password %>
+      </div>
+
+      <div class="col-sm-10">
+        <%= f.password_field :old_password, class: 'form-control form-control-lg' %>
+      </div>
+    </div>
+<% end %>
+
+  <!--new_record? Если обьект @user еще в бд не присутствует а присутсвукет только в памяти, то тогда это считаем новой записью и нам нужно создать, пишеи регистрироваться -->
+  <%= f.submit (@user.new_record? ? "Register!" : "Save"), class: 'btn btn-primary btn-lg' %>
 <% end %>

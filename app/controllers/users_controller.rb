@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   #проверим что пользователь в системе для того чтоб только он мог редактировать профиль
   before_action :require_authentication, only: %i[edit update]
 
-  before_action :set_user!
+  before_action :set_user!, only: %i[edit update]
   
   def new
     @user = User.new
@@ -30,13 +30,18 @@ class UsersController < ApplicationController
   end
 
   def update
-
+    if @user.update user_params
+      flash[:success] = "Your profile was successfully updated!"
+      redirect_to edit_user_path(@user)
+    else
+      render :edit
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :old_password)
   end
 
   def set_user!

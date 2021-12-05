@@ -22,7 +22,10 @@
             <!--в выпадающем меню делаем link to чтобы не подсвечивать пункты, много заморочиться придется -->
             
             <ul class="dropdown-menu">
-              <li><%= link_to 'Edit profile', edit_user_path(current_user), class: 'dropdown-item' %></li> 
+              <li><%= link_to 'Edit profile', edit_user_path(current_user), class: 'dropdown-item' %></li>
+              <!--добавили дивайдер чтоб в выпадающем меню разделить пункты чертой  -->
+              <li><hr class="dropdown-divider"></li>
+
               <li><%= link_to 'Log Out', session_path, class: 'dropdown-item', data: {method: :delete} %></li>
             </ul>
           </li>
