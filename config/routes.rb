@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   #resource для того чтобы не нужны были идентификаты в маршрутах, чтобы выйти например из сессии destroy
   resource :session, only: %i[new create destroy]
   #Создаем ресурс для пользователя
-  resources :users, only: %i[new create]
+  resources :users, only: %i[new create edit update]
   
   #resources создает множество маршрутов для 1 контроллера, можно подписать only: %i[index new edit create update destroy show]
   #для questions создать маршруты только методов что в массиве

@@ -26,6 +26,22 @@ module Authentication
   def sign_out
     session.delete :user_id
   end
+
+  def require_authentication
+    #если пользователя в системе просто выходим, это нужно для проверки destroy(выхода). Чтоб пользователь не мог вбить в адресной строке этот url
+    return if user_signed_in?
+
+    flash[:warning] = "You are not signed in!"
+    redirect_to root_path
+  end
+
+  def require_no_authentication
+    #Если пользователя нет в системе то сразу выходим отсюда
+    return unless user_signed_in?
+    #если есть то просто редирект
+    flash[:warning] = "You are already signed in!"
+    redirect_to root_path
+  end
    #Это значтит следующие методы могут работать как хелперы, не только в контроллерах но во вью чтоб доступны были
     helper_method :current_user, :user_signed_in?
     end

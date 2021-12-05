@@ -4,7 +4,7 @@
 
 <h1 class="mb-4">Log In</h1>
 <!-- Отправляем по url так как модели нет, это POST запрос create как раз псмотри в маршртуах -->
-<%= form_with url: sessions_path do |f| %>
+<%= form_with url: session_path do |f| %>
   <div class="mb-3 row">
       <div class="col-sm-2 col-form-label">
         <%= f.label :email %>

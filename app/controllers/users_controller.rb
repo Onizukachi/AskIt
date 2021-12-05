@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  #скажем что пользовователь не вошел в систему, только в этом случае позволим зарегаться
+  before_action :require_no_authentication, only: %i[new create]
+  #проверим что пользователь в системе для того чтоб только он мог редактировать профиль
+  before_action :require_authentication, only: %i[edit update]
+
+  before_action :set_user!
+  
   def new
     @user = User.new
   end
@@ -18,9 +25,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
+  def update
+
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation)
+  end
+
+  def :set_user!
+    @user = User.find params[:id]
   end
 end

@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  #разрешать создавать сессию только если пользователь не в системе
+  before_action :require_no_authentication, only: %i[new create]
+  #Проверить чтобы разрешать выходить только если в системе
+  before_action :require_authentication, only: :destroy
 
   def new
     #Форма без обьекта просто говорим на какой url отравить
