@@ -60,6 +60,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
@@ -67,7 +68,7 @@ GEM
     byebug (11.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
-    erubi (1.10.0)
+    erubi (1.11.0)
     faker (2.22.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
@@ -78,18 +79,6 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    kaminari (1.2.2)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.2.2)
-      kaminari-activerecord (= 1.2.2)
-      kaminari-core (= 1.2.2)
-    kaminari-actionview (1.2.2)
-      actionview
-      kaminari-core (= 1.2.2)
-    kaminari-activerecord (1.2.2)
-      activerecord
-      kaminari-core (= 1.2.2)
-    kaminari-core (1.2.2)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -106,6 +95,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -192,12 +183,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
   byebug
   faker (~> 2)
   jbuilder (~> 2.7)
-  kaminari (~> 1.2.2)
   listen (~> 3.3)
+  pagy (~> 5.10)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.6, >= 6.1.6.1)
