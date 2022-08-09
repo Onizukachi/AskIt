@@ -11,7 +11,8 @@ class AnswersController < ApplicationController
       flash[:success] = "Answer created"
       redirect_to question_path(@question)
     else
-      @pagy, @answers = pagy @question.answers.order(created_at: :desc)
+      @pagy, @answers = pagy @question.answers.order(created_at: :desc).decorate
+      @question = @question.decorate
       render 'questions/show'
     end
   end

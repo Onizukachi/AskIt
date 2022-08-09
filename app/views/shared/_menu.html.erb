@@ -13,7 +13,7 @@
         <% if user_signed_in? %>
           <li>
             <a class="nav-link px-2 text-white" href="#">
-            <%= current_user.name %>
+            <%= current_user.name_or_email %>
             </a>
           </li>
         <% else %>
