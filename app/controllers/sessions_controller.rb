@@ -10,7 +10,9 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(params[:password])
       sign_in user
-      flash[:succes] = "Welcome back, #{current_user.name_or_email}!"
+      remember(user) if params[:remember_me] == '1'
+
+      flash[:success] = "Welcome back, #{current_user.name_or_email}!"
       redirect_to root_path
     else
       flash.now[:warning] = "Incorrect email and/or password"
