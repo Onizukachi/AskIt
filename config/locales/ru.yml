@@ -1,0 +1,109 @@
+---
+ru:
+  activerecord:
+    attributes:
+      answer:
+        body: Текст
+        question: Вопрос
+      question:
+        body: Текст
+        title: Заголовок
+      user:
+        created_at: Создан
+        email: Email
+        name: Имя
+        old_password: Старый пароль
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        updated_at: Обновлён
+    models:
+      question: Вопрос
+  admin:
+    users:
+      create:
+        success: Пользователи загружены!
+      index:
+        download_zipped: Загрузить архив с XLSX
+        title: Управление пользователями
+        upload_form:
+          archive: Выберите архив
+          submit: Загрузить!
+        upload_zipped: Загрузить пользователей в XLSX
+  answers:
+    create:
+      success: Ответ создан!
+    destroy:
+      success: Ответ удалён!
+    edit:
+      title: Редактировать вопрос
+    update:
+      success: Ответ обновлён!
+  en: Английский
+  global:
+    button:
+      delete: Удалить
+      edit: Изменить
+      show: Показать
+      submit: Отправить
+    dialog:
+      you_sure: Вы уверены?
+    flash:
+      already_signed_in: Вы уже вошли в систему!
+      not_signed_in: Вы не вошли в систему!
+    text:
+      omission: "... (далее)"
+  menu:
+    edit_profile: Профиль
+    home: Главная
+    log_in: Войти
+    log_out: Выйти
+    questions: Вопросы
+    sign_up: Регистрация
+    users: Пользователи
+  pages:
+    index:
+      title: Добро пожаловать в AskIt!
+  questions:
+    create:
+      success: Вопрос создан!
+    destroy:
+      success: Вопрос удалён!
+    edit:
+      title: Редактировать вопрос
+    index:
+      new: Новый вопрос
+      title: Вопросы
+    new:
+      title: Новый вопрос
+    show:
+      answers: Ответы
+      write_answer: Напишите свой ответ
+    update:
+      success: Вопрос обновлён!
+  ru: Русский
+  sessions:
+    create:
+      invalid_creds: Неверный email и/или пароль!
+      success: С возвращением, %{name}!
+    destroy:
+      success: До новых встреч!
+    new:
+      form:
+        email: Email
+        password: Пароль
+        remember_me: Запомнить меня
+        submit: Войти!
+      title: Войти
+  users:
+    create:
+      success: Добро пожаловать, %{name}!
+    edit:
+      title: Редактировать профиль
+    global:
+      forms:
+        register: Регистрация
+        save: Сохранить
+    new:
+      title: Регистрация
+    update:
+      success: Ваш профиль был обновлён!

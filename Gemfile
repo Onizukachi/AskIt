@@ -32,6 +32,7 @@ gem 'caxlsx', '~> 3.1'
 gem 'caxlsx_rails', '~> 0.6'
 gem 'rubyXL', '~> 3.4'
 gem 'activerecord-import', '~> 1.2'
+gem 'rails-i18n', '~> 7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
