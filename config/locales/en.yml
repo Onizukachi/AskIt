@@ -2,6 +2,8 @@
 en:
   activerecord:
     attributes:
+      comment:
+        body: Body
       answer:
         body: Body
         question: Question
@@ -29,6 +31,9 @@ en:
           archive: Select archive
           submit: Upload!
         upload_zipped: Upload users from XLSX
+  comments:
+    create:
+      success: Comment created!
   answers:
     create:
       success: Answer created!
@@ -76,6 +81,7 @@ en:
     new:
       title: New question
     show:
+      comments: Comments
       answers: Answers
       write_answer: Write your answer
     update:
